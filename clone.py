@@ -152,7 +152,7 @@ from keras.models import Model
 import matplotlib.pyplot as plt
 
 history_object = model.fit_generator(train_generator, steps_per_epoch = len(train_samples), \
-    validation_data = validation_generator, validation_steps = len(validation_samples), epochs = 1, verbose = 1)
+    validation_data = validation_generator, validation_steps = len(validation_samples), epochs = 5, verbose = 1)
 
 print(history_object.history.keys())
 
