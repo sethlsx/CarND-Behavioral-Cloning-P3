@@ -48,41 +48,62 @@ from keras.layers.pooling import MaxPooling2D
 
 model = Sequential()
 
+#Cropping image
+model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(3,160,320)))
+
 
 #Lambda layer
-model.add(Lambda(lambda x: (x / 255.0) - 0.5, input_shape = (160, 320, 3)))
+model.add(Lambda(lambda x: (x / 255.0) - 0.5))
 
 #Layer 1
-model.add(Conv2D(30, kernel_size = (3, 3), padding = 'valid', activation = 'relu', input_shape=(160, 320, 3)))
+model.add(Conv2D(3, kernel_size = (5, 5), padding = 'valid', activation = 'relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 #Layer 2
-model.add(Conv2D(60, kernel_size = (3, 3), padding = 'valid', activation = 'relu'))
+model.add(Conv2D(24, kernel_size = (5, 5), padding = 'valid', activation = 'relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 #Layer 3
-model.add(Conv2D(120, kernel_size = (3, 3), padding = 'valid', activation = 'relu'))
+model.add(Conv2D(36, kernel_size = (5, 5), padding = 'valid', activation = 'relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+
+#Layer 4
+model.add(Conv2D(48, kernel_size = (3, 3), padding = 'valid', activation = 'relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+#Layer 5
+model.add(Conv2D(64, kernel_size = (3, 3), padding = 'valid', activation = 'relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(rate = 0.6))
 
 #Flatten
 model.add(Flatten())
 
-#Layer 4, full connected layer
+#Layer 6, full connected layer
 model.add(Dense(1024, activation = 'relu'))
 model.add(Dropout(rate = 0.5))
 
 
-#Layer 5
+#Layer 7
 model.add(Dense(512, activation = 'relu'))
 
-#Layer 6
+#Layer 8
+model.add(Dense(256, activation = 'relu'))
+
+#Layer 9
+model.add(Dense(128, activation = 'relu'))
+
+
+#Output
+
+
 model.add(Dense(1))
 
 #Train the model below
 
 model.compile(loss = 'mse', optimizer = 'adam')
-model.fit(X_train, y_train, validation_split=0.2, shuffle = True, nb_epoch = 5)
+model.fit(X_train, y_train, validation_split=0.2, shuffle = True, nb_epoch = 1)
 
 #Save the model
 
