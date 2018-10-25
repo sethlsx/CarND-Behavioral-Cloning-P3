@@ -93,7 +93,7 @@ model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160, 320, 3)))
 
 
 #Lambda layer
-model.add(Lambda(lambda x: (x / 127.5) - 1.))
+model.add(Lambda(lambda x: (x / 255) - 0.5))
 
 #Layer 1
 model.add(Conv2D(3, kernel_size = (5, 5), padding = 'valid', activation = 'relu'))
@@ -121,18 +121,18 @@ model.add(Dropout(rate = 0.6))
 model.add(Flatten())
 
 #Layer 6, full connected layer
-model.add(Dense(1024, activation = 'relu'))
+model.add(Dense(256, activation = 'relu'))
 model.add(Dropout(rate = 0.5))
 
 
 #Layer 7
-model.add(Dense(512, activation = 'relu'))
+model.add(Dense(128, activation = 'relu'))
 
 #Layer 8
-model.add(Dense(256, activation = 'relu'))
+model.add(Dense(64, activation = 'relu'))
 
 #Layer 9
-model.add(Dense(128, activation = 'relu'))
+model.add(Dense(32, activation = 'relu'))
 
 
 #Output
@@ -152,8 +152,10 @@ from keras.models import Model
 import matplotlib.pyplot as plt
 
 history_object = model.fit_generator(train_generator, steps_per_epoch = len(train_samples), \
-    validation_data = validation_generator, validation_steps = len(validation_samples), epochs = 3, verbose = 1)
+    validation_data = validation_generator, validation_steps = len(validation_samples), epochs = 5, verbose = 1)
 
+#Save the model
+model.save('model.h5')
 print(history_object.history.keys())
 
 #plot the training and validation loss for each epoch
@@ -165,7 +167,3 @@ plt.ylabel('mean squared error loss')
 plt.xlabel('epoch')
 plt.legend(['training set', 'validation set'], loc='upper right')
 plt.show()
-plt.savefig('loss.jpg')
-#Save the model
-
-model.save('model.h5')

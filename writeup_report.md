@@ -56,13 +56,12 @@ The architecture of the model is as follows:
 12. Max pooling layer, pool size 2x2, output shape of (1, 8, 64)
 13. Drop out layer with drop out rate 0.6
 14. Flatten layer, output shape of (512, 1)
-15. Full connected layer, output shape of (1024, 1)
+15. Full connected layer, output shape of (256, 1)
 16. Drop out layer with drop out rate 0.5
-16. Full connected layer, output shape of (512, 1)
-17. Full connected layer, output shape of (256, 1)
-18. Full connected layer, output shape of (128, 1)
-19. Full connected layer, output shape of (64, 1)
-20. Output layer.
+16. Full connected layer, output shape of (128, 1)
+17. Full connected layer, output shape of (64, 1)
+18. Full connected layer, output shape of (32, 1)
+19. Output layer.
 
 
 
@@ -121,7 +120,7 @@ This is some pictures of my driving:
 ![alt text][image4]
 ![alt text][image5]
 
-I tried to drive on track 2 to collect more data just to find that I am a poorly driver and can't stay in the track. So I gave up track 2.
+I also drove on track 2 to collect more data.
 
 To augment the data sat, I also flipped images and angles. For example, here is an image that has then been flipped:
 
@@ -130,7 +129,7 @@ To augment the data sat, I also flipped images and angles. For example, here is 
 
 Etc ....
 
-After the collection process, I had 54948(2x27474, original + flipped) number of data points. I then preprocessed this data by cropping, flipping and normalization.
+After the collection process, I had 101520(2x50760, original + flipped) number of data points. I then preprocessed this data by cropping, flipping and normalization.
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
