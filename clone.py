@@ -11,7 +11,7 @@ from random import shuffle
 
 lines = []
 
-with open('./data/driving_log.csv') as csvfile:
+with open('/opt/data/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         lines.append(line)
@@ -29,7 +29,7 @@ def generator(samples, batch_size = 32):
             angles = []
             for batch_sample in batch_samples:
                 for i in range(3):
-                    name = './data/IMG/' + batch_sample[i].split('/')[-1]
+                    name = '/opt/data/IMG/' + batch_sample[i].split('/')[-1]
                     image = mpimg.imread(name)
                     images.append(image)
                     if i == 0:

@@ -2,7 +2,20 @@
 
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-Overview
+This is for the self-driving car nano degree behavior cloning project of udacity.
+
+These are the core files:
+- model.py: defining the model and train it
+- drive.py: apply the model to the simulator
+- model.h5: the model
+- video.py: to record the simulator running by the model
+- writeup_report.md: the report required by udacity
+
+Because the udacity workspace can't handle the data, the train data isn't included in this repository.
+
+The following is the original readme:
+
+Overview  
 ---
 This repository contains starting files for the Behavioral Cloning Project.
 
