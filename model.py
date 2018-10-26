@@ -11,7 +11,7 @@ from random import shuffle
 
 lines = []
 
-with open('../data/driving_log.csv') as csvfile:
+with open('/opt/data/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         lines.append(line)
@@ -29,7 +29,7 @@ def generator(samples, batch_size = 32):
             angles = []
             for batch_sample in batch_samples:
                 for i in range(3):
-                    name = '../data/IMG/' + batch_sample[i].split('/')[-1]
+                    name = '/opt/data/IMG/' + batch_sample[i].split('/')[-1]
                     image = mpimg.imread(name)
                     images.append(image)
                     if i == 0:
@@ -85,6 +85,7 @@ from keras.layers import Flatten, Dense, Lambda, Dropout, Cropping2D
 from keras.layers.convolutional import Conv2D
 #from keras.layers.core import Activation
 from keras.layers.pooling import MaxPooling2D
+from keras import regularizers
 
 model = Sequential()
 
@@ -98,6 +99,7 @@ model.add(Lambda(lambda x: (x / 255) - 0.5))
 #Layer 1
 model.add(Conv2D(3, kernel_size = (5, 5), padding = 'valid', activation = 'relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(rate = 0.8))
 
 #Layer 2
 model.add(Conv2D(24, kernel_size = (5, 5), padding = 'valid', activation = 'relu'))
@@ -132,7 +134,7 @@ model.add(Dense(128, activation = 'relu'))
 model.add(Dense(64, activation = 'relu'))
 
 #Layer 9
-model.add(Dense(32, activation = 'relu'))
+model.add(Dense(32, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 
 
 #Output
