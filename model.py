@@ -128,18 +128,18 @@ model.add(Dropout(rate = 0.8))
 model.add(Flatten())
 
 #Layer 6, full connected layer (2592, 1)
-model.add(Dense(1024, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 #model.add(Dropout(rate = 0.5))
 
 
 #Layer 7
-model.add(Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
-
-#Layer 8
 model.add(Dense(256, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 
-#Layer 9
+#Layer 8
 model.add(Dense(128, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+
+#Layer 9
+model.add(Dense(64, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 
 
 #Output
