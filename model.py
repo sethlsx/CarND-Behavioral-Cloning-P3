@@ -118,28 +118,28 @@ model.add(Conv2D(48, kernel_size = (3, 3), padding = 'valid', activation = 'relu
     kernel_regularizer = regularizers.l2(0.01)))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-#Layer 5 removed
-#model.add(Conv2D(64, kernel_size = (1, 5), padding = 'valid', activation = 'relu', \
-#    kernel_regularizer = regularizers.l2(0.01)))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+#Layer 5 (3, 18, 48)
+model.add(Conv2D(64, kernel_size = (1, 1), padding = 'valid', activation = 'relu', \
+    kernel_regularizer = regularizers.l2(0.01)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(rate = 0.8))
 
-#Flatten (3, 18, 48)
+#Flatten (1, 9, 64)
 model.add(Flatten())
 
-#Layer 6, full connected layer (2592, 1)
-model.add(Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+#Layer 6, full connected layer (576, 1)
+model.add(Dense(256, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 #model.add(Dropout(rate = 0.5))
 
 
 #Layer 7
-model.add(Dense(256, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
-
-#Layer 8
 model.add(Dense(128, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 
-#Layer 9
+#Layer 8
 model.add(Dense(64, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+
+#Layer 9
+model.add(Dense(32, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 
 
 #Output
