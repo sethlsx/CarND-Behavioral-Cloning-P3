@@ -74,8 +74,8 @@ for line in lines:
 X_train = np.array(images)
 y_train = np.array(measurements)
 '''
-train_generator = generator(train_samples, batch_size=128)
-validation_generator = generator(validation_samples, batch_size=128)
+train_generator = generator(train_samples, batch_size=64)
+validation_generator = generator(validation_samples, batch_size=64)
 
 
 #This is the model
