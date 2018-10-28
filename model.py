@@ -97,9 +97,9 @@ model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160, 320, 3)))
 model.add(Lambda(lambda x: (x / 255) - 0.5))
 
 #Layer 1 (90, 320, 3)
-model.add(Conv2D(24, kernel_size = (5, 5), padding = 'valid', activation = 'relu', \
+model.add(Conv2D(24, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.01)))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(rate = 0.8))
 
 #Layer 2 (43, 158, 3)
