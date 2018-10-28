@@ -97,49 +97,49 @@ model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160, 320, 3)))
 model.add(Lambda(lambda x: (x / 255) - 0.5))
 
 #Layer 1 (90, 320, 3)
-model.add(Conv2D(3, kernel_size = (5, 5), padding = 'valid', activation = 'relu', \
+model.add(Conv2D(24, kernel_size = (5, 5), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.01)))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(rate = 0.8))
 
 #Layer 2 (43, 158, 3)
-model.add(Conv2D(24, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
-    kernel_regularizer = regularizers.l2(0.01)))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-#Layer 3 (20, 78, 24)
 model.add(Conv2D(36, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.01)))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+
+#Layer 3 (20, 78, 24)
+model.add(Conv2D(48, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
+    kernel_regularizer = regularizers.l2(0.01)))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
 
 
 #Layer 4 (9, 38, 36)
-model.add(Conv2D(48, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
+model.add(Conv2D(64, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.01)))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
 
 #Layer 5 (3, 18, 48)
-model.add(Conv2D(64, kernel_size = (1, 1), padding = 'valid', activation = 'relu', \
+model.add(Conv2D(128, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.01)))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(rate = 0.8))
+#model.add(MaxPooling2D(pool_size=(2, 2)))
+#model.add(Dropout(rate = 0.8))
 
 #Flatten (1, 9, 64)
 model.add(Flatten())
 
 #Layer 6, full connected layer (576, 1)
-model.add(Dense(256, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(1024, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 #model.add(Dropout(rate = 0.5))
 
 
 #Layer 7
-model.add(Dense(128, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 
 #Layer 8
-model.add(Dense(64, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(256, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 
 #Layer 9
-model.add(Dense(32, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(128, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
 
 
 #Output
@@ -159,7 +159,7 @@ from keras.models import Model
 import matplotlib.pyplot as plt
 
 history_object = model.fit_generator(train_generator, steps_per_epoch = len(train_samples), \
-    validation_data = validation_generator, validation_steps = len(validation_samples), epochs = 5, verbose = 1)
+    validation_data = validation_generator, validation_steps = len(validation_samples), epochs = 3, verbose = 1)
 
 #Save the model
 model.save('model.h5')
