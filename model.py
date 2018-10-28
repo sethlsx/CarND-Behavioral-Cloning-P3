@@ -74,8 +74,8 @@ for line in lines:
 X_train = np.array(images)
 y_train = np.array(measurements)
 '''
-train_generator = generator(train_samples, batch_size=32)
-validation_generator = generator(validation_samples, batch_size=32)
+train_generator = generator(train_samples, batch_size=16)
+validation_generator = generator(validation_samples, batch_size=16)
 
 
 #This is the model
@@ -98,29 +98,29 @@ model.add(Lambda(lambda x: (x / 255) - 0.5))
 
 #Layer 1 (90, 320, 3)
 model.add(Conv2D(12, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
-    kernel_regularizer = regularizers.l2(0.01)))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+    kernel_regularizer = regularizers.l2(0.005)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(rate = 0.8))
 
 #Layer 2 (43, 158, 3)
 model.add(Conv2D(24, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
-    kernel_regularizer = regularizers.l2(0.01)))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+    kernel_regularizer = regularizers.l2(0.005)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 
 #Layer 3 (20, 78, 24)
 model.add(Conv2D(36, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
-    kernel_regularizer = regularizers.l2(0.01)))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+    kernel_regularizer = regularizers.l2(0.005)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 
 
 #Layer 4 (9, 38, 36)
 model.add(Conv2D(48, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
-    kernel_regularizer = regularizers.l2(0.01)))
+    kernel_regularizer = regularizers.l2(0.005)))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 
 #Layer 5 (3, 18, 48)
 model.add(Conv2D(64, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
-    kernel_regularizer = regularizers.l2(0.01)))
+    kernel_regularizer = regularizers.l2(0.005)))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(rate = 0.8))
 
@@ -128,18 +128,18 @@ model.add(Conv2D(64, kernel_size = (3, 3), padding = 'valid', activation = 'relu
 model.add(Flatten())
 
 #Layer 6, full connected layer (576, 1)
-model.add(Dense(1024, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.005)))
 #model.add(Dropout(rate = 0.5))
 
 
 #Layer 7
-model.add(Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(256, activation = 'relu', kernel_regularizer = regularizers.l2(0.005)))
 
 #Layer 8
-model.add(Dense(256, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(128, activation = 'relu', kernel_regularizer = regularizers.l2(0.005)))
 
 #Layer 9
-model.add(Dense(128, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)))
+model.add(Dense(64, activation = 'relu', kernel_regularizer = regularizers.l2(0.005)))
 
 
 #Output
