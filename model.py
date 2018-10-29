@@ -110,18 +110,18 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 #Layer 3 (43, 158, 24)
 model.add(Conv2D(36, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.001)))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 
 
 #Layer 4 (41, 156, 36)
 model.add(Conv2D(48, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.001)))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 
 #Layer 5 (39, 154, 48)
 model.add(Conv2D(64, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.001)))
-#model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(rate = 0.8))
 
 #Flatten (37, 152, 64)
