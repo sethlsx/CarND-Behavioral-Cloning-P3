@@ -49,9 +49,12 @@ The architecture of the model is as follows:
 4. Convolutional layer 2, kernel size of 3x3, valid padding, depth of 24, activation of RELU, output shape of (86, 316, 24)
 5. Max pooling layer, pool size 2x2, output shape of (43, 158, 24)
 6. Convolutional layer 3, kernel size of 3x3, valid padding, depth of 36, activation of RELU, output shape of (41, 156, 36)
-7. Convolutional layer 4, kernel size of 3x3, valid padding, depth of 48, activation of RELU, output shape of (39, 154, 48)
-11. Convolutional layer 5, kernel size of 3x3, valid padding, depth of 64, activation of RELU, output shape of (37, 152, 64)
-12. Flatten layer, output shape of (359936, 1)
+7. Max pooling layer, pool size 2x2, output shape of (20, 78, 36)
+8. Convolutional layer 4, kernel size of 3x3, valid padding, depth of 48, activation of RELU, output shape of (18, 76, 48)
+9. Max pooling layer, pool size 2x2, output shape of (9, 38, 48)
+10. Convolutional layer 5, kernel size of 3x3, valid padding, depth of 64, activation of RELU, output shape of (7, 36, 64)
+11. Max pooling layer, pool size 2x2, output shape of (3, 18, 64)
+12. Flatten layer, output shape of (3456, 1)
 15. Full connected layer, output shape of (512, 1)
 16. Full connected layer, output shape of (256, 1)
 17. Full connected layer, output shape of (128, 1)
@@ -130,3 +133,18 @@ After the collection process, I had 416160(2x69369x3, original + flipped) number
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as mentioned before. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+During the training, I encountered multiple difficult issues.
+
+First, the udacity workspace always went into idle when I am not looking. This happened before the training could finish and made it impossible to train the model. After 3 days, I figured this could be caused by Chrome. So I switched to aws to train my model.
+
+Then I found my model was trained very slowly. It took almost 1 hour and a half to train the model for 1 epoch. I searched the internet for solution. And I found that if I increase the batch size in the code. The model would train even slower. One of my friends suggest that I check the memory of the GPU on aws using 'nvidia-smi'. I checked and reduced the batch size to 16, and the model trained much quicker.(40 miniutes for 1 epoch)
+
+After I trained my model on aws, I found that it can't be run on my local machine. Later I figured out this was caused by the opencv library installed in the environment. After I create a new environment, this was fixed.
+
+Then I modified the model architecture many times to improve the performance. At last I trained a model that worked perfectly.
+
+However, later I found that the model is too complicated that it is very large! It took up to 2Gb space on disk and can't be upload to github. So I had to simplify the model. I add 3 more pooling layers. Then I found out the simplified model worked even better and only took 24mb on disk.
+
+After all these, I run the video.py and make a video of the model running the car around track 1 for 2 laps.
+
