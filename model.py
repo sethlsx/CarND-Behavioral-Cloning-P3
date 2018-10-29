@@ -102,32 +102,32 @@ model.add(Conv2D(12, kernel_size = (3, 3), padding = 'valid', activation = 'relu
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(rate = 0.8))
 
-#Layer 2 (43, 158, 3)
+#Layer 2 (88, 318, 12)
 model.add(Conv2D(24, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.001)))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-#Layer 3 (20, 78, 24)
+#Layer 3 (43, 158, 24)
 model.add(Conv2D(36, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.001)))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 
 
-#Layer 4 (9, 38, 36)
+#Layer 4 (41, 156, 36)
 model.add(Conv2D(48, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.001)))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 
-#Layer 5 (3, 18, 48)
+#Layer 5 (39, 154, 48)
 model.add(Conv2D(64, kernel_size = (3, 3), padding = 'valid', activation = 'relu', \
     kernel_regularizer = regularizers.l2(0.001)))
 #model.add(MaxPooling2D(pool_size=(2, 2)))
 #model.add(Dropout(rate = 0.8))
 
-#Flatten (1, 9, 64)
+#Flatten (37, 152, 64)
 model.add(Flatten())
 
-#Layer 6, full connected layer (576, 1)
+#Layer 6, full connected layer (359936, 1)
 model.add(Dense(512, activation = 'relu', kernel_regularizer = regularizers.l2(0.001)))
 #model.add(Dropout(rate = 0.5))
 
